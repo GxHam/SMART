@@ -77,8 +77,9 @@ choice <- function(setup, touchup = NA, midpoint = FALSE, filetype = c("tif"),
                                                        toString(round(midpnt_ref_AP[n], digits=2)), ", est. z ",
                                                        toString(midpnt_ref_z[n])), gravity = gravity, size= font_size,
                                         color = font_col, location = font_location)
+      disp_im  <- magick::image_scale(ref_im, 250)
       quartz(canvas="black", title= paste("z-slice ", toString(midpnt_ref_z[n])), xpos = xpos[2])
-      plot(ref_im)
+      plot(disp_im)
 
 
       line  <- TRUE
@@ -152,7 +153,8 @@ choice <- function(setup, touchup = NA, midpoint = FALSE, filetype = c("tif"),
           ref_im <- magick::image_annotate(ref_im, paste(toString(i), ", ", toString(im_num)),
                                            gravity = gravity, size = font_size, color = font_col , location = font_location)
           quartz(canvas="black", title= paste("z-slice ", toString(im_num)), xpos= xpos[i])
-          plot(ref_im)
+          disp_im <- magick::image_scale(ref_im, 300)
+          plot(disp_im)
         }
 
         cat(paste("\nYour reference AP is", toString(round(AP, digits=2)),
